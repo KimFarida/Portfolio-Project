@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
-                     <a class="nav-link" href="index.html">Home</a>
+                     <a class="nav-link" href="{% url 'index' %}">Home</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="health.html">Health</a>
@@ -98,7 +98,7 @@
                            {% for message in messages %}
                            <h5>{{message}}</h5>
                            {% endfor %}
-                        <form action="login" method="POST">
+                        <form action="" method="POST">
                             {% csrf_token %}
                             <input type="text" class="Email_text" placeholder="Username" name="username" />
                             <input type="password" class="Email_text" placeholder="Password" name="password" />
@@ -109,7 +109,7 @@
                             </div>
                         </form>
                         <br>
-                        <a href="register"><h5>Don't Have an Account? Sign Up Now</h5></a>
+                        <a href="{% url 'register' %}"><h5>Don't Have an Account? Sign Up Now</h5></a>
                      </div>
                   </div>
                </div>

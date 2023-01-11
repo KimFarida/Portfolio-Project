@@ -40,20 +40,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
+               {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <h3>Welcome,{{user.username}}!</h3>
+                  </li>
                   <li class="nav-item">
                      <a class="nav-link" href="{% url 'index' %}">Home</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="health.html">Health</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="medicine.html">Medicine</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="news.html">News</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="client.html">Client</a>
+                     <a class="nav-link" href="{% url 'booking' %}">Appointments</a>
                   </li>
                   <li class="nav-item active">
                      <a class="nav-link" href="contact.html">Contact Us</a>
@@ -62,74 +60,36 @@
                      <a class="nav-link" href="#"><img src="{% static 'images/search-icon.png' %}"></a>
                   </li>
                </ul>
+               {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="news.html">News</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'booking' %}">Bookings</a>
+                  </li>
+                  <li class="nav-item active">
+                     <a class="nav-link" href="contact.html">Contact Us</a>
+                  </li>
+                  <li class="nav-item">
+                {% endif %}
+
             </div>
          </nav>
       </div>
       <!-- header section end -->
       <!-- contact section start -->
       <div class="contact_section layout_padding margin_90">
-         <div class="container">
-            <h1 class="contact_taital">What we do</h1>
-            <div class="news_section_2">
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="icon_main">
-                        <div class="icon_7"><img src="{% static 'images/icon-7.png' %}"></div>
-                        <h4 class="diabetes_text">Diabetes and obesity Counselling </h4>
-                     </div>
-                     <div class="icon_main">
-                        <div class="icon_7"><img src="{% static 'images/icon-5.png' %}"></div>
-                        <h4 class="diabetes_text">Obstetrics and Gynsecology</h4>
-                     </div>
-                     <div class="icon_main">
-                        <div class="icon_7"><img src="{% static 'images/icon-6.png' %}"></div>
-                        <h4 class="diabetes_text">Surgical and medical Oncology</h4>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="contact_box">
-                        <h1 class="book_text">Sign Up Now</h1>
-                        <style>
-                           h5{
-                               color: red;
-                           }
-                           </style>
-                           
-                           {% for message in messages %}
-                           <h5>{{message}}</h5>
-                           {% endfor %}
-                        <form action="" method="POST">
-                        {% csrf_token %}
-                           <input type="text" class="Email_text" placeholder="First Name" name="firstname" />
-                           <input type="text" class="Email_text" placeholder="Last Name" name="lastname" />
-                           <input type="email" class="Email_text" placeholder="Email" name="email" />
-                           <input type="tel" class="Email_text" placeholder="Phone Number" name="phone" />
-                           <input type="text" class="Email_text" placeholder="Username" name="username" />
-                           <input type="password" class="Email_text" placeholder="Password" name="password"/>
-                           <input type="password" class="Email_text" placeholder="Repeat Password" name="password2" />
-                           <br>
-                           <div id="wrapper">
-                              <label for="yes_no_radio"><h4>Are you a Patient or A Doctor ?</h4></label>
-                              <p>
-                              <input type="radio" name="patient" id = "patient" value="patient">Patient </input>
-                              </p>
-                              <p>
-                              <input type="radio" name="patient" id="doctor" value="doctor">Doctor </input>
-                              </p>
-                         </div>
-                        <br/>
-                        <br/>
-                        <div class="send_bt">
-                           <input type="submit"  class="send_bt"/>
-                        </div>
-                        </form>
-                        <a href="{% url 'login' %}"><h5>Already Have an Account? Sign in Now</h5></a>
-                     </div>
-                     
-                  </div>
-               </div>
-            </div>
-         </div>
+        {% if messages %}
+        {% for message in messages %}
+            <h3>{{message}}</h3>
+        {% endfor %}
+        {% endif %}
       </div>
       <!-- contact section end -->
       <!-- footer section start -->
