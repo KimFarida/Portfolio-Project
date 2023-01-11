@@ -12,6 +12,7 @@ def index(request):
 
 def register(request):  
     if request.method == 'POST':
+        print("I am working")
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
@@ -39,7 +40,7 @@ def register(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password, first_name=firstname, last_name=lastname)
                 user.save()
-                new_patient = Patient.objects.create(name='patient')
+                new_patient = Patient.objects.create(username=username, name=firstname)
                 new_patient.save()
                 return redirect('login')
                                          
@@ -47,9 +48,10 @@ def register(request):
             messages.info(request, 'Password not the same!')
             return redirect('register')
         
+       
     else:
         return render(request, 'register.html') 
-        
+   
 
 def login(request):
     if request.method == 'POST':
