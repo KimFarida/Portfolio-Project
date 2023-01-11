@@ -96,50 +96,38 @@
         {% endfor %}
         {% endif %}
         
-        {% if user.is_authenticated %}
-        <h1 class=""><b>BOOK AN APPOINTMENT</b></h1>
+        
+{% if user.is_authenticated %}
+<h1 class="">BOOK AN APPOINTMENT</h1>
 
-        <div class="">
-            <form method="post" action="{% url 'booking' %}" class="" required>
-                {% csrf_token %}
-
-                <!--input service-->
-                <div>
-                    <h3 class="">Select Service:</h3>
-                    <select class="" name="service">
-                        <option value="Doctor care">Doctor care</option>
-                        <option value="Nursing care">Nursing care</option>
-                        <option value="Medical social services">Medical social services</option>
-                        <option value="Homemaker or basic assistance care">Homemaker or basic assistance care</option>
-                    </select>
-                </div>
-                    <!--input day--><br><br>
-                    <div class="mt-3">
-                        <br>
-                        <h3 class="">Select Day:</h3>
-                        <select class="" name="day">
-                            {% for validateWeekday in validateWeekdays %}
-                            <option value="{{validateWeekday}}">{{validateWeekday}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <br/><br>
-                    <div>
-                        <button type="submit" class="btn btn-primary text-white">Continue</button>
-                    </div>
-                </div>
-            </form>
+<div class="">
+    <form method="post" action="{% url 'bookingSubmit' %}" class="" required>
+        {% csrf_token %}
+        
+        <!--input time-->
+        <h3 class="">Time:</h3>
+        <div>
+            <select class="" name="time">
+                {% for time in times %}
+                <option value="{{time}}">{{time}}</option>
+                {% endfor %}
+            </select>
+        <br>    
         </div>
+        <br>
+        <button type="submit" class="send_bt">Submit</button>
 
-        {% else %}
+    </form>
+</div>
 
-        <div class="">
-            <h1 class="">You Are Not Signed in!</h1>
-            <a href="{% url 'register' %}" class="">Sign in</a>
-        </div>
+{% else %}
 
-        {% endif %}
+<div class="">
+    <h1 class="">First Sign in!</h1>
+    <a href="{% url 'login' %}" class="">Sign in</a>
+</div>
+
+{% endif %}
 
       </div>
       <!-- contact section end -->

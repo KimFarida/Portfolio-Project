@@ -87,10 +87,10 @@ def bookingSubmit(request):
         'times':hour,
     })
 
-def userPanel(request):
+def userDashboard(request):
     user = request.user
     appointments = Appointment.objects.filter(user=user).order_by('day', 'time')
-    return render(request, 'userPanel.html', {
+    return render(request, 'userDashboard.html', {
         'user':user,
         'appointments':appointments,
     })
@@ -174,7 +174,7 @@ def userUpdateSubmit(request, id):
                     messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
             messages.success(request, "Please Select A Service!")
-        return redirect('userPanel')
+        return redirect('userDashboard')
 
 
     return render(request, 'userUpdateSubmit.html', {
@@ -182,7 +182,7 @@ def userUpdateSubmit(request, id):
         'id': id,
     })
 
-def staffPanel(request):
+def staffDashboard(request):
     today = datetime.today()
     minDate = today.strftime('%Y-%m-%d')
     deltatime = today + timedelta(days=21)
@@ -191,7 +191,7 @@ def staffPanel(request):
     #Only show the Appointments 21 days from today
     items = Appointment.objects.filter(day__range=[minDate, maxDate]).order_by('day', 'time')
 
-    return render(request, 'staffPanel.html', {
+    return render(request, 'staffDashboard.html', {
         'items':items,
     })
 

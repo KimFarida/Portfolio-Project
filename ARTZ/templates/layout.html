@@ -34,7 +34,11 @@
       <!-- header section start -->
       <div class="header_section">
          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="logo"><a href="index.html"><img src="{% static 'images/logo.png' %}"></a></div>
+            <div class="logo"><a href="index.html"><img src="{% static 'images/logo.png' %}"></a>
+               {% if user.is_authenticated %}
+               <nav><br> <h4>Welcome, {{user.username}}!</h4></nav>
+               {% endif %}
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +46,7 @@
                <ul class="navbar-nav mr-auto">
                {% if user.is_authenticated %}
                   <li class="nav-item">
-                     <h3>Welcome,{{user.username}}!</h3>
+                     <a class="nav-link" href="{% url 'index' %}">Medicals</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="{% url 'index' %}">Home</a>
@@ -54,7 +58,7 @@
                      <a class="nav-link" href="{% url 'booking' %}">Appointments</a>
                   </li>
                   <li class="nav-item active">
-                     <a class="nav-link" href="contact.html">Contact Us</a>
+                     <a class="nav-link" href="contact.html">Profile</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#"><img src="{% static 'images/search-icon.png' %}"></a>

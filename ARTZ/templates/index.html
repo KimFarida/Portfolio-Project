@@ -77,14 +77,16 @@
                         <div class="col-md-6">
                            {% if user.is_authenticated %}
                            <h1 class="banner_taital">Welcome <br><span style="color: #151515;">{{user.username}}</span></h1>
-                           <p class="banner_text">There are many variations of passages of Lorem Ipsum</p>
+                           <p class="banner_text">"Your Digital Health Assistant "
+                           </p>
                            <div class="btn_main">
                               <div class="more_bt"><a href="#">Dashboard</a></div>
                              <div class="contact_bt"><a href="logout">Log Out</a></div>
                           </div>
                            {% else %}
-                           <h1 class="banner_taital">Health <br><span style="color: #151515;">Care</span></h1>
-                           <p class="banner_text">There are many variations of passages of Lorem Ipsum</p>
+                           <h1 class="banner_taital">AR <br><span style="color: #151515;">TZ</span></h1>
+                           <p class="banner_text">"Your Digital Health Assistant "
+                           </p>
                            <div class="btn_main">
                               <div class="more_bt"><a href="register">Sign Up</a></div>
                              <div class="contact_bt"><a href="login">Log In</a></div>
@@ -249,11 +251,9 @@
                </div>
                <div class="col-md-6">
                   <div class="contact_box">
-                     <h1 class="book_text">Book Appoinment</h1>
-                     <input type="text" class="Email_text" placeholder="Name" name="Name">
-                     <input type="text" class="Email_text" placeholder="Name" name="Name">
-                     <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                     <div class="send_bt"><a href="#">SEND</a></div>
+                     <h1 class="book_text">Schedule An Appoinment</h1>
+                     
+                     <div class="send_bt"><a href="{% url 'booking' %}">BOOK NOW</a></div>
                 </div>
                </div>
             </div>
@@ -330,9 +330,9 @@
             <div class="col-lg-3 col-sm-6">
                <div class="footer_logo"><a href="{% static index.html %}"><img src="{% static 'images/footer-logo.png' %}"></a></div>
                <h1 class="adderss_text">Contact Us</h1>
-               <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Page when looking at its</span></div>
-               <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+7586656566</span></div>
-               <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">volim@gmail.com</span></div>
+               <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Lagos, Nigeria.</span></div>
+               <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+2348029305929</span></div>
+               <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">farimomoh@gmail.com</span></div>
             </div>
             <div class="col-lg-3 col-sm-6">
                <h1 class="adderss_text">Doctors</h1>
@@ -344,7 +344,7 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                <h1 class="adderss_text">Newsletter</h1>
-               <input type="text" class="Enter_text" placeholder="Enter your Emil" name="Enter your Emil">
+               <input type="text" class="Enter_text" placeholder="Enter your Email" name="Enter your Email">
                <div class="subscribe_bt"><a href="#">Subscribe</a></div>
             <div class="social_icon">
                   <ul>
@@ -362,7 +362,7 @@
    <!-- copyright section start -->
    <div class="copyright_section">
       <div class="container">
-         <p class="copyright_text">2019 All Rights Reserved. Design by <a href="https://html.design"></a>Free html Templates</a></p>
+         <p class="copyright_text">2023 All Rights Reserved. Design by <a href="https://html.design"></a>Free html Templates</a></p>
       </div>
    </div>
    <!-- copyright section end -->

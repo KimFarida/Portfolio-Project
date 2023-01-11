@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Dashboard</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/{% static 'css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   </head>
+   <body>
+      <!-- header section start -->
+      <div class="header_section">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="logo"><a href="index.html"><img src="{% static 'images/logo.png' %}"></a>
+               {% if user.is_authenticated %}
+               <nav><br> <h4>Welcome, {{user.username}}!</h4></nav>
+               {% endif %}
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+               {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'index' %}">Medicals</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="news.html">News</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'booking' %}">Appointments</a>
+                  </li>
+                  <li class="nav-item active">
+                     <a class="nav-link" href="contact.html">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#"><img src="{% static 'images/search-icon.png' %}"></a>
+                  </li>
+               </ul>
+               {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="news.html">News</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'booking' %}">Bookings</a>
+                  </li>
+                  <li class="nav-item active">
+                     <a class="nav-link" href="contact.html">Contact Us</a>
+                  </li>
+                  <li class="nav-item">
+                {% endif %}
+
+            </div>
+         </nav>
+      </div>
+      <!-- header section end -->
+      <!-- contact section start -->
+      <div class="">
+        {% if messages %}
+        {% for message in messages %}
+            <h3>{{message}}</h3>
+        {% endfor %}
+        {% endif %}
+      </div>
+
+    
+    <h3 class="banner_taital">Dash<span style="color: #151515;">board</span></h3>
+    
+    {% if user.is_authenticated %}
+
+    <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+        <h1 class="text-center mt-5 mb-5">Staff Panel</h1>
+        <input class="form-control form-control-lg fs-3 border border-primary" id="myInput" type="text" placeholder="Search Appointment">
+        <br>
+        
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover mx-auto">
+            <thead>
+                <tr>
+                <th class="text-center" scope="col">Time</th>
+                <th class="text-center" scope="col">First Name</th>
+                <th class="text-center" scope="col">Last Name</th>
+                <th class="text-center" scope="col">Service</th>
+                <th class="text-center" scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for item in items %}
+                <tr>
+                <td class="text-center">{{item.time}}</td>
+                <td class="text-center">{{item.user.first_name}}</td>
+                <td class="text-center">{{item.user.last_name}}</td>
+                <td class="text-center">{{item.service}}</td>
+                <td class="text-center">{{item.day}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5">
+    <h1 class="p-2  me-3">First Sign in!</h1>
+    <a href="{% url 'login' %}" class="btn btn-primary text-white">Sign in</a>
+    </div>
+
+    {% endif %}
+
+    <!--Staff Panel Search-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+    </script>
+     <!-- contact section end -->
+      <!-- footer section start -->
+      <div class="footer_section layout_padding">
+        <div class="container">
+           <div class="row">
+              <div class="col-lg-3 col-sm-6">
+                 <div class="footer_logo"><a href="index.html"><img src="{% static 'images/footer-logo.png' %}"></a></div>
+                 <h1 class="adderss_text">Contact Us</h1>
+                 <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Page when looking at its</span></div>
+                 <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+7586656566</span></div>
+                 <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">volim@gmail.com</span></div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                 <h1 class="adderss_text">Doctors</h1>
+                 <div class="hiphop_text_1">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                 <h1 class="adderss_text">Useful Links</h1>
+                 <div class="Useful_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered ,</div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                 <h1 class="adderss_text">Newsletter</h1>
+                 <input type="text" class="Enter_text" placeholder="Enter your Emil" name="Enter your Emil">
+                 <div class="subscribe_bt"><a href="#">Subscribe</a></div>
+                 <div class="social_icon">
+                    <ul>
+                       <li><a href="#"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+                       <li><a href="#"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+                       <li><a href="#"><img src="{% static 'images/linkedin-icon.png' %}"></a></li>
+                       <li><a href="#"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- footer section end -->
+     <!-- copyright section start -->
+     <div class="copyright_section">
+        <div class="container">
+           <p class="copyright_text">2023 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
+        </div>
+     </div>
+     <!-- copyright section end -->
+     <!-- Javascript files-->
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+     <script src="{% static 'js/popper.min.js' %}"></script>
+     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+     <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+     <script src="{% static 'js/plugin.js' %}"></script>
+     <!-- sidebar -->
+     <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+     <script src="{% static 'js/custom.js' %}"></script>
+     <!-- javascript --> 
+     <script src="{% static 'js/owl.carousel.js' %}"></script>
+     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  </body>
+</html>

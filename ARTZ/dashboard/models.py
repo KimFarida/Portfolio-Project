@@ -9,9 +9,13 @@ from appointments.models import models
 """
 
 class Patient(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True,)
-    
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+    ]
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)  
     diagnosis = models.CharField(max_length=200,null=True, blank=True,)
     doctors = models.ManyToManyField(User, related_name='medics')
     medical_history = models.TextField(null=True, blank=True)
