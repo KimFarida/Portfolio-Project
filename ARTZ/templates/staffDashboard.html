@@ -44,7 +44,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
-               {% if user.is_authenticated %}
+               {% if user.is_authenticated|.is_patient %}
                   <li class="nav-item">
                      <a class="nav-link" href="{% url 'index' %}">Medicals</a>
                   </li>
@@ -115,6 +115,8 @@
                 <th class="text-center" scope="col">Last Name</th>
                 <th class="text-center" scope="col">Service</th>
                 <th class="text-center" scope="col">Date</th>
+                <th class="text-center" scope="col">Doctor</th>
+
                 </tr>
             </thead>
             <tbody id="myTable">
@@ -125,6 +127,7 @@
                 <td class="text-center">{{item.user.last_name}}</td>
                 <td class="text-center">{{item.service}}</td>
                 <td class="text-center">{{item.day}}</td>
+                <td class="text-center">{{item.doctor.first_name}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -163,21 +166,21 @@
               <div class="col-lg-3 col-sm-6">
                  <div class="footer_logo"><a href="index.html"><img src="{% static 'images/footer-logo.png' %}"></a></div>
                  <h1 class="adderss_text">Contact Us</h1>
-                 <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Page when looking at its</span></div>
-                 <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+7586656566</span></div>
-                 <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">volim@gmail.com</span></div>
+                 <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Lagos, Nigeria</span></div>
+                 <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+2348029305929</span></div>
+                 <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">farimomoh@gmail.com</span></div>
               </div>
               <div class="col-lg-3 col-sm-6">
                  <h1 class="adderss_text">Doctors</h1>
-                 <div class="hiphop_text_1">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</div>
+                 <div class="hiphop_text_1"></div>
               </div>
               <div class="col-lg-3 col-sm-6">
                  <h1 class="adderss_text">Useful Links</h1>
-                 <div class="Useful_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered ,</div>
+                 <div class="Useful_text"></div>
               </div>
               <div class="col-lg-3 col-sm-6">
                  <h1 class="adderss_text">Newsletter</h1>
-                 <input type="text" class="Enter_text" placeholder="Enter your Emil" name="Enter your Emil">
+                 <input type="text" class="Enter_text" placeholder="Enter your Email" name="Enter your Email">
                  <div class="subscribe_bt"><a href="#">Subscribe</a></div>
                  <div class="social_icon">
                     <ul>
@@ -195,7 +198,7 @@
      <!-- copyright section start -->
      <div class="copyright_section">
         <div class="container">
-           <p class="copyright_text">2023 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
+           <p class="copyright_text">2023 All Rights Reserved. Design by <a href="https://html.design">Farida Momoh</a></p>
         </div>
      </div>
      <!-- copyright section end -->
