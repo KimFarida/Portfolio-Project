@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
-from .models import Patient
+from dashboard.models import Patient
 from django.contrib import messages
 
 
@@ -40,7 +40,7 @@ def register(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password, first_name=firstname, last_name=lastname)
                 user.save()
-                new_patient = Patient.objects.create(username=username, name=firstname)
+                new_patient = Patient(user=user)
                 new_patient.save()
                 return redirect('login')
                                          

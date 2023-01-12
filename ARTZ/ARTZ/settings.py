@@ -133,3 +133,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_SETTINGS_MODULE = 'dashboard.settings'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

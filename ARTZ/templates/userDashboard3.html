@@ -1,4 +1,3 @@
-<title>Online Booking</title>
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Sign Up</title>
+      <title>Dashboard</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -50,10 +49,7 @@
                      <a class="nav-link" href="{% url 'index' %}">Medicals</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{% url 'index' %}">Home</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="news.html">News</a>
+                     <a class="nav-link" href="index">Home</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="{% url 'booking' %}">Appointments</a>
@@ -62,7 +58,7 @@
                      <a class="nav-link" href="contact.html">Profile</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#"><img src="{% static 'images/search-icon.png' %}"></a>
+                     <a class="nav-link" href=""><img src="{% static 'images/search-icon.png' %}"></a>
                   </li>
                </ul>
                {% else %}
@@ -89,94 +85,80 @@
       </div>
       <!-- header section end -->
       <!-- contact section start -->
-      <div class="contact_section layout_padding margin_90">
+      <div class="">
         {% if messages %}
         {% for message in messages %}
             <h3>{{message}}</h3>
         {% endfor %}
         {% endif %}
-        
-        {% if user.is_authenticated %}
-        <h1 class=""><b>BOOK AN APPOINTMENT</b></h1>
-
-        <div class="">
-            <form method="post" action="{% url 'booking' %}" class="" required>
-                {% csrf_token %}
-
-                <!--input service-->
-                <div>
-                    <h3 class="">Select Service:</h3>
-                    <select class="" name="service">
-                        <option value="Doctor care">Doctor care</option>
-                        <option value="Nursing care">Nursing care</option>
-                        <option value="Medical social services">Medical Social Services</option>
-                        <option value="HomeCare/Special Care">Homemaker or basic assistance care</option>
-                    </select>
-                </div>
-                    <!--input doctor--><br><br>
-                    <div class="mt-3">
-                     <br>
-                     <h3 class="">Select Doctor:</h3>
-                     <select  name="doctor">
-                         {% for doctor in doctors %}
-                         <option value="{{doctor.pk}}">Dr. {{doctor.first_name}} {{doctor.last_name}} - {{doctor.specialty}}</option>
-                         {% endfor %}
-                     </select>
-                 </div><br><br>
-                 
-                    <!--input day-->
-                    <div class="mt-3">
-                        <br>
-                        <h3 class="">Select Day:</h3>
-                        <select class="" name="day">
-                            {% for validateWeekday in validateWeekdays %}
-                            <option value="{{validateWeekday}}">{{validateWeekday}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <br/><br>
-                    <div>
-                        <button type="submit" class="btn btn-primary text-white">Continue</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        {% else %}
-
-        <div class="">
-            <h1 class="">You Are Not Signed in!</h1>
-            <a href="{% url 'register' %}" class="">Sign in</a>
-        </div>
-
-        {% endif %}
-
       </div>
+
+      {% if user.is_authenticated %}
+    <h3 class="banner_taital">Dash<span style="color: #151515;">board</span></h3>
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+    <h2 class="">Patient Info:</h2>
+    <ul class="list-group fs-4 mt-3">
+            <li class="list-group mt-2">First Name: {{ user.first_name }}</li>
+            <li class="list-group mt-2">Last Name: {{ user.last_name }}</li>
+            <li class="list-group mt-2">Username: {{ user.username }}</li>
+    </ul>
+</div>
+
+<!--Appointment Loop-->
+{% if appointments.count > 0 %}
+<div class="mt-5 ">
+    <h1 class=" ms-5">Appointments:</h1>
+    <div class="shadow p-4 mb-3 bg-body bg-body rounded text-black  m-5">
+        {% for appointment in appointments %}
+        <div class="list-group fs-4 border p-3 mb-3">
+            <p class="list-group mt-2">Day: {{ appointment.day }}</p>
+            <p class="list-group mt-2">Time: {{ appointment.time }}</p>
+            <p class="list-group mt-2">Doctor:Dr. {{ appointment.doctor.first_name }} {{appointment.doctor.last_name}} {{appointment.doctor.specialty}}</p>
+            <p class="list-group mt-2">Service: {{ appointment.service }}</p>
+            <div class="mt-3 mb-2">
+                <a class="btn btn-primary rounded-3 p-2" href="{% url 'userUpdate' appointment.id %}">Edit Appointment</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5">
+    <h1 class="p-2  ms-3">First Sign in!</h1>
+    <a href="{% url 'login' %}" class="btn btn-primary text-white">Sign in</a>
+</div>
+
+{% endif %}
+
+
       <!-- contact section end -->
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-lg-3 col-sm-6">
-                  <div class="footer_logo"><a href="index.html"><img src="{% static 'images/footer-logo.png' %}"></a></div>
+                  <div class="footer_logo"><a href="{% url 'index'%}"><img src="{% static 'images/footer-logo.png' %}"></a></div>
                   <h1 class="adderss_text">Contact Us</h1>
-                  <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Page when looking at its</span></div>
-                  <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+7586656566</span></div>
-                  <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">volim@gmail.com</span></div>
+                  <div class="map_icon"><img src="{% static 'images/map-icon.png' %}"><span class="paddlin_left_0">Lagos, Nigeria</span></div>
+                  <div class="map_icon"><img src="{% static 'images/call-icon.png' %}"><span class="paddlin_left_0">+2348029305929</span></div>
+                  <div class="map_icon"><img src="{% static 'images/mail-icon.png' %}"><span class="paddlin_left_0">farimomoh@gmail.com</span></div>
                </div>
                <div class="col-lg-3 col-sm-6">
-                  <h1 class="adderss_text">Doctors</h1>
-                  <div class="hiphop_text_1">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</div>
+                  <h1 class="adderss_text"></h1>
+                  <div class="hiphop_text_1"></div>
                </div>
                <div class="col-lg-3 col-sm-6">
-                  <h1 class="adderss_text">Useful Links</h1>
-                  <div class="Useful_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered ,</div>
+                  <h1 class="adderss_text"></h1>
+                  <div class="Useful_text"> </div>
                </div>
                <div class="col-lg-3 col-sm-6">
                   <h1 class="adderss_text">Newsletter</h1>
-                  <input type="text" class="Enter_text" placeholder="Enter your Emil" name="Enter your Emil">
-                  <div class="subscribe_bt"><a href="#">Subscribe</a></div>
+                  <input type="text" class="Enter_text" placeholder="Enter your Email" name="Enter your Email">
+                  <div class="subscribe_bt"><a href="">Subscribe</a></div>
                   <div class="social_icon">
                      <ul>
                         <li><a href="#"><img src="{% static 'images/fb-icon.png' %}"></a></li>
@@ -209,5 +191,5 @@
       <!-- javascript --> 
       <script src="{% static 'js/owl.carousel.js' %}"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-   </body>
+</body>
 </html>
