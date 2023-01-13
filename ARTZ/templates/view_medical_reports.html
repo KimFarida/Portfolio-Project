@@ -1,0 +1,24 @@
+
+    <h1>Medicalreports for {{ patient.first_name }} {{ patient.last_name }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Symptoms</th>
+                <th>Diagnosis</th>
+                <!-- <th>Prescription</th>
+                <th>Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in medical_reports %}
+                <tr>
+                    <td>{{report.date }}</td>                    
+                    <td>{{report.symptoms }}</td>
+                    <td>{{report.diagnosis }}</td>
+                   
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>

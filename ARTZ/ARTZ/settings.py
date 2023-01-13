@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'appointments',
+    'medical_reports',
+    'django.forms',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DJANGO_SETTINGS_MODULE = 'dashboard.settings'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

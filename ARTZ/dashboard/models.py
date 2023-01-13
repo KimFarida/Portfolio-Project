@@ -35,20 +35,9 @@ class Patient(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)  
     diagnosis = models.CharField(max_length=200,null=True, blank=True,)
     doctors = models.ManyToManyField(Doctor)
-    medical_history = models.TextField(null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    def __str__(self):
-        return self.first_name+' '+self.last_name
+    #def __str__(self):
+        #return f"{self.first_name} {self.last_name}"
 
-class MedicalReport(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    date = models.DateField()
-    description = models.TextField()
-    diagnosis = models.TextField()
-    treatment = models.TextField()
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    def __str__(self):
-        return self.patient.first_name+' '+self.patient.last_name
 
 
