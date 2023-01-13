@@ -52,7 +52,7 @@
             <ul class="navbar-nav mr-auto">
                {% if user.is_authenticated %}
                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">Medicals</a>
+                  <a class="nav-link" href="">Medicals</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link" href="{% url 'index' %}">Home</a>
@@ -113,6 +113,8 @@
          <li class="list-group mt-2">First Name: {{ user.first_name }}</li>
          <li class="list-group mt-2">Last Name: {{ user.last_name }}</li>
          <li class="list-group mt-2">Username: {{ user.username }}</li>
+         <li class="list-group mt-2">Gender: {{ user.gender }}</li>
+
       </ul>
    </div>
 

@@ -43,4 +43,4 @@ class Appointment(models.Model):
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
-        return f"{self.user.username} | day: {self.day} | time: {self.time} |doctor: {self.doctor} "
+        return f"{self.user.first_name} {self.user.last_name}  | day: {self.day} | time: {self.time} |doctor: {self.doctor} "

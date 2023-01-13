@@ -6,3 +6,9 @@ class MedicalReportForm(forms.ModelForm):
     class Meta:
         model = MedicalReport
         fields = ['age','weight', 'bloodgroup', 'medical_history','date', 'symptoms','diagnosis','treatment',  'notes']
+
+
+class MedicalReportEditForm(forms.ModelForm):
+    class Meta:
+        model = MedicalReport
+        fields = ['age','weight', 'bloodgroup', 'medical_history','date', 'symptoms','diagnosis','treatment',  'notes']
