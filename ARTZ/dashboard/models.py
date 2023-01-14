@@ -12,11 +12,11 @@ from django.contrib.auth.models import User
     
 class Doctor(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255, null=True, blank=True )
-    last_name = models.CharField(max_length=255, null=True, blank=True)  
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255 )  
     #group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='medics')
-    specialty = models.CharField(max_length=200)
-    years_experience = models.PositiveIntegerField()
+    specialty = models.CharField(max_length=200, null=True, blank=True)
+    years_experience = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.specialty} "

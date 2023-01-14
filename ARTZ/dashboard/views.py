@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
-from dashboard.models import Patient
+from dashboard.models import Patient, Doctor
 from django.contrib import messages
 
 
@@ -20,7 +20,8 @@ def register(request):
         username = request.POST['username'] 
         password = request.POST['password']
         password2 = request.POST['password2'] 
-        patient = request.POST['patient']
+        user_type = request.POST['user_type']
+        
         
         
         count = 11
@@ -40,10 +41,16 @@ def register(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password, first_name=firstname, last_name=lastname)
                 user.save()
-                new_patient = Patient(user=user)
-                new_patient.save()
+
+                if user_type == "patient":
+                    new_patient = Patient(user=user, first_name=firstname, last_name=lastname)
+                    new_patient.save()
+                    
+                else:
+                    user_type == "doctor"
+                    new_doctor = Doctor(user=user, first_name=firstname, last_name=lastname)
+                    new_doctor.save()                  
                 return redirect('login')
-                                         
         else:
             messages.info(request, 'Password not the same!')
             return redirect('register')
