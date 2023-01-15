@@ -12,7 +12,7 @@ def index(request):
 
 def register(request):  
     if request.method == 'POST':
-        print("I am working")
+        # print("I am working")
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
@@ -43,7 +43,7 @@ def register(request):
                 user.save()
 
                 if user_type == "patient":
-                    new_patient = Patient(user=user, first_name=firstname, last_name=lastname)
+                    new_patient = Patient(user=user, first_name=firstname, last_name=lastname, phone_number=phone)
                     new_patient.save()
                     
                 else:
@@ -69,7 +69,11 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('userDashboard')
+            if user == Doctor:
+                return redirect('staffDashboard')
+            else:
+                user == Patient
+                return redirect('userDashboard')
         else:
             messages.info(request, 'Credentials invalid')
             return redirect('login')

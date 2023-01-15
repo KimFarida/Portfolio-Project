@@ -107,6 +107,16 @@
                            <input type="text" class="Email_text" placeholder="Username" name="username" />
                            <input type="password" class="Email_text" placeholder="Password" name="password"/>
                            <input type="password" class="Email_text" placeholder="Repeat Password" name="password2" />
+                           <div id="wrapper", >
+                              <label  class="mt-5" for="yes_no_radio"><h4>Select Your Gender</h4></label>
+                              <p>
+                              <input type="radio" name="gender" id= "patient" value="female">Female</input>
+                              </p>
+                              <p>
+                              <input type="radio" name="gender" id= "doctor" value="male">Male</input>
+                              </p>
+                         </div>
+                        <br/>
                            <br>
                            <div id="wrapper">
                               <label for="yes_no_radio"><h4>Are you a Patient or A Doctor ?</h4></label>
@@ -120,10 +130,10 @@
                         <br/>
                         <br/>
                         <div class="send_bt">
-                           <input type="submit"  class="send_bt"/>
+                           <input type="submit"  class="send_bt mb-3"/>
                         </div>
                         </form>
-                        <a href="{% url 'login' %}"><h5>Already Have an Account? Sign in Now</h5></a>
+                        <a href="{% url 'login' %}" class="my-5 text-center"><h5>Already Have an Account? Sign in Now</h5></a>
                      </div>
                      
                   </div>

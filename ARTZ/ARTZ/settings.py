@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'appointments',
     'medical_reports',
     'django.forms',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
